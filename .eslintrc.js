@@ -18,7 +18,7 @@ module.exports = {
     'react',
   ],
   rules: {
-    // Turn off all specific rules
+    // General rules turned off
     'jsx-a11y/label-has-associated-control': 'off',
     'react/jsx-props-no-spreading': 'off',
     'react/react-in-jsx-scope': 'off',
@@ -39,5 +39,10 @@ module.exports = {
     'jsx-a11y/no-static-element-interactions': 'off',
     'react/no-array-index-key': 'off',
     'jsx-a11y/anchor-is-valid': 'off',
+
+    // Specific rules to turn off
+    'eol-last': 'off',
+    'jsx-quotes': 'off',
+    'operator-linebreak': 'off',
   },
 };
