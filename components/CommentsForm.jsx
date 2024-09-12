@@ -124,7 +124,6 @@ const CommentsForm = ({ slug }) => {
             value="true"
           />
           <label className="text-gray-500 cursor-pointer" htmlFor="storeData">
-            {" "}
             Save my name, email in this browser for the next time I comment.
           </label>
         </div>
