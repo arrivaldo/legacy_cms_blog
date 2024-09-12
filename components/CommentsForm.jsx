@@ -1,32 +1,35 @@
-import React, { useState, useEffect } from 'react';
-import { submitComment } from '../services';
+import React, { useState, useEffect } from "react";
+import { submitComment } from "../services";
 
 const CommentsForm = ({ slug }) => {
   const [error, setError] = useState(false);
   const [localStorage, setLocalStorage] = useState(null);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-  
+
   // Initialize formData with empty strings instead of null
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    comment: '',
+    name: "",
+    email: "",
+    comment: "",
     storeData: false,
   });
 
   useEffect(() => {
     setLocalStorage(window.localStorage);
     const initialFormData = {
-      name: window.localStorage.getItem('name') || '',
-      email: window.localStorage.getItem('email') || '',
-      storeData: !!(window.localStorage.getItem('name') || window.localStorage.getItem('email')),
+      name: window.localStorage.getItem("name") || "",
+      email: window.localStorage.getItem("email") || "",
+      storeData: !!(
+        window.localStorage.getItem("name") ||
+        window.localStorage.getItem("email")
+      ),
     };
     setFormData(initialFormData);
   }, []);
 
   const onInputChange = (e) => {
     const { target } = e;
-    if (target.type === 'checkbox') {
+    if (target.type === "checkbox") {
       setFormData((prevState) => ({
         ...prevState,
         [target.name]: target.checked,
@@ -54,34 +57,35 @@ const CommentsForm = ({ slug }) => {
     };
 
     if (storeData) {
-      localStorage.setItem('name', name);
-      localStorage.setItem('email', email);
+      localStorage.setItem("name", name);
+      localStorage.setItem("email", email);
     } else {
-      localStorage.removeItem('name');
-      localStorage.removeItem('email');
+      localStorage.removeItem("name");
+      localStorage.removeItem("email");
     }
 
-    submitComment(commentObj)
-      .then((res) => {
-        if (res.createComment) {
-          // Clear the form fields on success
-          setFormData({
-            name: storeData ? name : '',
-            email: storeData ? email : '',
-            comment: '',
-            storeData,
-          });
-          setShowSuccessMessage(true);
-          setTimeout(() => {
-            setShowSuccessMessage(false);
-          }, 3000);
-        }
-      });
+    submitComment(commentObj).then((res) => {
+      if (res.createComment) {
+        // Clear the form fields on success
+        setFormData({
+          name: storeData ? name : "",
+          email: storeData ? email : "",
+          comment: "",
+          storeData,
+        });
+        setShowSuccessMessage(true);
+        setTimeout(() => {
+          setShowSuccessMessage(false);
+        }, 3000);
+      }
+    });
   };
 
   return (
     <div className="bg-white shadow-lg rounded-lg p-8 pb-12 mb-8">
-      <h3 className="text-xl mb-8 font-semibold border-b pb-4">Leave a Reply</h3>
+      <h3 className="text-xl mb-8 font-semibold border-b pb-4">
+        Leave a Reply
+      </h3>
       <div className="grid grid-cols-1 gap-4 mb-4">
         <textarea
           value={formData.comment}
@@ -120,12 +124,14 @@ const CommentsForm = ({ slug }) => {
             value="true"
           />
           <label className="text-gray-500 cursor-pointer" htmlFor="storeData">
-            {' '}
+            {" "}
             Save my name, email in this browser for the next time I comment.
           </label>
         </div>
       </div>
-      {error && <p className="text-xs text-red-500">All fields are mandatory</p>}
+      {error && (
+        <p className="text-xs text-red-500">All fields are mandatory</p>
+      )}
       <div className="mt-8">
         <button
           type="button"
