@@ -13,6 +13,7 @@ const PostWidget = ({ category, slug }) => {
     if (slug) {
       getSimilarPosts(category, slug).then((result) => {
         setRelatedPosts(result);
+        console.log('POOOOOOOOOT',result)
       });
     } else {
       getRecentPosts().then((result) => {
