@@ -6,12 +6,12 @@ import Link from 'next/link';
 import { grpahCMSImageLoader } from '../util';
 import { getSimilarPosts, getRecentPosts } from '../services';
 
-const PostWidget = ({ categories, slug }) => {
+const PostWidget = ({ category, slug }) => {
   const [relatedPosts, setRelatedPosts] = useState([]);
 
   useEffect(() => {
     if (slug) {
-      getSimilarPosts(categories, slug).then((result) => {
+      getSimilarPosts(category, slug).then((result) => {
         setRelatedPosts(result);
       });
     } else {

@@ -25,7 +25,10 @@ const PostDetails = ({ post }) => {
           </div>
           <div className="col-span-1 lg:col-span-4">
             <div className="relative lg:sticky top-8">
-              <PostWidget slug={post.slug} categories={post.categories.map((category) => category.slug)} />
+            <PostWidget
+  slug={post.slug}
+  categories={post.category ? [post.category.slug] : []} // Handle the category field
+/>
               <Categories />
             </div>
           </div>
